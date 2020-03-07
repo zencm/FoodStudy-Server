@@ -30,6 +30,9 @@ class CreateFSBaseTables extends Migration
             $table->smallInteger('mood')->nullable();
             $table->smallInteger('digestion')->nullable();
 
+            $table->index(['date']);
+
+
         });
 
         Schema::create('fs_log_food', function (Blueprint $table) {
@@ -41,11 +44,13 @@ class CreateFSBaseTables extends Migration
             
             $table->unsignedBigInteger('bls')->nullable();
             $table->string('bls_key')->nullable();
-            $table->string('food', 255)->nullable();
+            $table->text('food')->nullable();
             
             $table->string('meal_type', 128)->nullable();
 
             $table->smallInteger('people')->unsigned();
+
+            $table->index(['date']);
             
         });
     }

@@ -18,4 +18,9 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    Route::group(['prefix' => 'foodapp'], function () {
+        Route::get('/', 'FoodAppManager@exportForm');
+        Route::get('/export', 'FoodAppManager@export');
+    });
 });
