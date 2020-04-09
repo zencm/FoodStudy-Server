@@ -30,6 +30,23 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 1,
             ])->save();
         }
+        
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => 'FoodApp',
+            'url'     => '/admin/foodapp',
+            'route'   => null,
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => 'voyager-data',
+                'color'      => '#fc6377',
+                'parent_id'  => null,
+                'order'      => 2,
+            ])->save();
+        }
+        
 
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
