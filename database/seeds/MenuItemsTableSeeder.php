@@ -31,14 +31,16 @@ class MenuItemsTableSeeder extends Seeder
             ])->save();
         }
         
-        $menuItem = MenuItem::firstOrNew([
+        
+        
+        $foodStudyMenuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'FoodApp',
-            'url'     => '/admin/foodapp',
+            'url'     => null,
             'route'   => null,
         ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
+        if (!$foodStudyMenuItem->exists) {
+            $foodStudyMenuItem->fill([
                 'target'     => '_self',
                 'icon_class' => 'voyager-data',
                 'color'      => '#fc6377',
@@ -46,9 +48,48 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 2,
             ])->save();
         }
-        
-
         $menuItem = MenuItem::firstOrNew([
+		                                     'menu_id' => $menu->id,
+		                                     'title'   => 'Studies',
+		                                     'url'     => '/admin/foodapp/studies',
+		                                     'route'   => null,
+	                                     ]);
+	    if (!$menuItem->exists) {
+		    $menuItem->fill([
+			                    'target'     => '_self',
+			                    'icon_class' => 'voyager-list',
+			                    'color'      => null,
+			                    'parent_id'  => $foodStudyMenuItem->id,
+			                    'order'      => 50,
+		                    ])->save();
+	    }
+	    
+	    
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => 'Logs',
+            'url'     => '/admin/foodapp/logs',
+            'route'   => null,
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => 'voyager-data',
+                'color'      => '#fc6377',
+                'parent_id'  => $foodStudyMenuItem->id,
+                'order'      => 51,
+            ])->save();
+        }
+	    
+	
+	
+	
+	
+	
+	
+	
+	
+	    $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => __('voyager::seeders.menu_items.media'),
             'url'     => '',

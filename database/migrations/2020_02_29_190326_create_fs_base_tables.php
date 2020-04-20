@@ -14,15 +14,35 @@ class CreateFSBaseTables extends Migration
     public function up()
     {
         Schema::create('fs_bls', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('bls_key', 12);
-            $table->string('name', 255);
+            $table->string('name_de', 255);
+            $table->string('name_en', 255);
         });
+        
+        Schema::create('fs_studies', function (Blueprint $table) {
+        	
+            $table->increments('id');
+            $table->string('name', 255);
+            $table->string('prefix', 32)->unique();
+            
+            $table->timestamp('from')->useCurrent();
+            $table->timestamp('until')->nullable();
+            
+            $table->boolean('reg_public')->default(false);
+            $table->string('reg_key', 128)->nullable();
+            
+            $table->unsignedInteger('reg_limit')->nullable();
+            
+            $table->unsignedInteger('user_count')->default(0);
+        });
+        
 
         Schema::create('fs_log', function (Blueprint $table) {
             $table->bigIncrements('id');
             
             $table->unsignedBigInteger('user');
+            $table->unsignedInteger('study');
             $table->timestamp('date')->useCurrent();
             $table->timestamp('received')->useCurrent();
             
@@ -39,10 +59,11 @@ class CreateFSBaseTables extends Migration
             $table->bigIncrements('id');
             
             $table->unsignedBigInteger('user');
+            $table->unsignedInteger('study');
             $table->timestamp('date')->useCurrent();
             $table->timestamp('received')->useCurrent();
             
-            $table->unsignedBigInteger('bls')->nullable();
+            $table->unsignedInteger('bls')->nullable();
             $table->string('bls_key')->nullable();
             $table->text('food')->nullable();
             
@@ -63,6 +84,7 @@ class CreateFSBaseTables extends Migration
     public function down()
     {
         Schema::dropIfExists('fs_bls');
+        Schema::dropIfExists('fs_studies');
         Schema::dropIfExists('fs_log');
         Schema::dropIfExists('fs_log_food');
     }

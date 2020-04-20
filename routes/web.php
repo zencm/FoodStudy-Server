@@ -22,5 +22,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'foodapp'], function () {
         Route::get('/', 'FoodAppManager@exportForm');
         Route::get('/export', 'FoodAppManager@export');
+        Route::get('/studies', 'FoodAdminStudyBreadController@index');
     });
+    
+    
 });

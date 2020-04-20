@@ -25,5 +25,9 @@ class FSLog extends Model{
     public function user(){
         return $this->belongsTo('App\User');
     }
+    
+    public function study(){
+        return $this->belongsTo('App\FSStudy');
+    }
 
 }

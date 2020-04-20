@@ -31,5 +31,8 @@ class FSLogFood extends Model{
         return $this->belongsTo('App\FSBLS');
     }
 
+    public function study(){
+        return $this->belongsTo('App\FSStudy');
+    }
 
 }
