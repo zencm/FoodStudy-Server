@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="username">{{ __('voyager::generic.username') }}</label>
+                                <label for="username">username (login)</label>
                                 <input type="username" class="form-control" id="username" name="username" placeholder="{{ __('voyager::generic.username') }}"
                                        value="{{ old('username', $dataTypeContent->username ?? '') }}">
                             </div>
@@ -56,6 +56,14 @@
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
                                        value="{{ old('email', $dataTypeContent->email ?? '') }}">
                             </div>
+
+
+                            <div class="form-group">
+                                <label for="name">Study</label>
+                                <input type="text" class="form-control" id="fs_study" name="fs_study" placeholder="Study ID"
+                                       value="{{ old('fs_study', $dataTypeContent->fs_study ?? '') }}">
+                            </div>
+
 
                             <div class="form-group">
                                 <label for="password">{{ __('voyager::generic.password') }}</label>

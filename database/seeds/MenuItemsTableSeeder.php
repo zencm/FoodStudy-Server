@@ -32,56 +32,6 @@ class MenuItemsTableSeeder extends Seeder
         }
         
         
-        
-        $foodStudyMenuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => 'FoodApp',
-            'url'     => null,
-            'route'   => null,
-        ]);
-        if (!$foodStudyMenuItem->exists) {
-            $foodStudyMenuItem->fill([
-                'target'     => '_self',
-                'icon_class' => 'voyager-data',
-                'color'      => '#fc6377',
-                'parent_id'  => null,
-                'order'      => 2,
-            ])->save();
-        }
-        $menuItem = MenuItem::firstOrNew([
-		                                     'menu_id' => $menu->id,
-		                                     'title'   => 'Studies',
-		                                     'url'     => '/admin/foodapp/studies',
-		                                     'route'   => null,
-	                                     ]);
-	    if (!$menuItem->exists) {
-		    $menuItem->fill([
-			                    'target'     => '_self',
-			                    'icon_class' => 'voyager-list',
-			                    'color'      => null,
-			                    'parent_id'  => $foodStudyMenuItem->id,
-			                    'order'      => 50,
-		                    ])->save();
-	    }
-	    
-	    
-        $menuItem = MenuItem::firstOrNew([
-            'menu_id' => $menu->id,
-            'title'   => 'Logs',
-            'url'     => '/admin/foodapp/logs',
-            'route'   => null,
-        ]);
-        if (!$menuItem->exists) {
-            $menuItem->fill([
-                'target'     => '_self',
-                'icon_class' => 'voyager-data',
-                'color'      => '#fc6377',
-                'parent_id'  => $foodStudyMenuItem->id,
-                'order'      => 51,
-            ])->save();
-        }
-	    
-	
 	
 	
 	
@@ -227,7 +177,7 @@ class MenuItemsTableSeeder extends Seeder
                 'target'     => '_self',
                 'icon_class' => 'voyager-settings',
                 'color'      => null,
-                'parent_id'  => null,
+                'parent_id'  => $toolsMenuItem->id,
                 'order'      => 14,
             ])->save();
         }

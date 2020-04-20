@@ -13,6 +13,14 @@ class CreateFSBaseTables extends Migration
      */
     public function up()
     {
+    	
+    	 Schema::table('users', function (Blueprint $table) {
+                $table->unsignedInteger('fs_study')
+                                    ->nullable()
+                                    ->default(null);
+        });
+    	 
+    	 
         Schema::create('fs_bls', function (Blueprint $table) {
             $table->increments('id');
             $table->string('bls_key', 12);
@@ -31,6 +39,7 @@ class CreateFSBaseTables extends Migration
             
             $table->boolean('reg_public')->default(false);
             $table->string('reg_key', 128)->nullable();
+            $table->string('reg_pass', 64)->nullable();
             
             $table->unsignedInteger('reg_limit')->nullable();
             

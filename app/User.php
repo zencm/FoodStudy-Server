@@ -18,7 +18,7 @@ implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password',
+        'name', 'username', 'email', 'password','fs_study',
     ];
 
     /**

@@ -3,6 +3,7 @@
 	namespace App;
 	
 	use Illuminate\Database\Eloquent\Model;
+	use Illuminate\Support\Facades\Hash;
 	
 	function slugify( $text ){
 		// replace non letter or digits by -
@@ -39,6 +40,21 @@
 		return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 	}
 	
+	function random_str(
+		$length,
+		$keyspace = '123456789abcdefghjklmnpqrstuvwxyzABCDEFGHLJKMNPQRSTUVWXYZ'
+	){
+		$str = '';
+		$max = mb_strlen($keyspace, '8bit') - 1;
+		if( $max < 1 ){
+			throw new Exception('$keyspace must be at least two characters long');
+		}
+		for( $i = 0 ; $i < $length ; ++$i ){
+			$str .= $keyspace[ random_int(0, $max) ];
+		}
+		return $str;
+	}
+	
 	
 	class FSStudy extends Model{
 		protected $table = 'fs_studies';
@@ -46,7 +62,7 @@
 		public $timestamps = false;
 		
 		
-		protected $fillable = [ 'from', 'until', 'name', 'prefix', 'reg_public', 'reg_key', 'reg_limit', 'user_count' ];
+		protected $fillable = [ 'from', 'until', 'name', 'prefix', 'reg_public', 'reg_key', 'reg_pass', 'reg_limit', 'user_count' ];
 		
 		protected $casts = [
 			// 'sleep' => 'integer',
@@ -62,6 +78,9 @@
 		public function fill( array $attributes ){
 			if( empty($attributes['reg_key']) )
 				$attributes['reg_key'] = guidv4();
+			
+			if( empty($attributes['reg_pass']) )
+				$attributes['reg_pass'] = random_str(8);
 			
 			if( empty($attributes['user_count']) )
 				$attributes['user_count'] = 0;
@@ -82,5 +101,24 @@
 			);
 		}
 		
+		
+		public function createCredentials(){
+			FSStudy::where('id', $this->id)
+				->increment('user_count');
+			
+			
+			$username = $this->prefix .'_'. $this->user_count;
+			$password = random_str(12);
+			
+			$user = User::create([
+				'fs_study' => $this->id,
+	            'name' => $username,
+	            'username' => $username,
+	            'password' => Hash::make($password),
+	        ]);
+			
+			return compact('username', 'password');
+			
+		}
 		
 	}

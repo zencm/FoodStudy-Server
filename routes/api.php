@@ -42,3 +42,13 @@ Route::group([
     Route::post('food', 'FoodStudy@recordFood');
 
 });
+
+Route::group([
+    'middleware' => 'api',
+    'namespace' => '\App\Http\Controllers',
+    'prefix' => 'study'
+], function ($router) {
+
+    Route::post('signup', 'StudySignup@signup');
+
+});
