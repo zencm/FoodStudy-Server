@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FSBLS;
 use App\FSLog;
 use App\FSLogFood;
 use Exception;
@@ -54,5 +55,21 @@ class FoodStudy extends Controller{
     }
 
 
+    public function bls( Request $request ){
+        if( !$this->authorize('browse_admin') )
+        	throw new Exception('this is not public data',403);
+        
+        
+    	$list = FSBLS::all(['id','bls_key','name_de']);
+    	$list->each(function($r){
+    		$r['key'] = $r['bls_key'];
+    		$r['de'] = $r['name_de'];
+    		unset( $r['bls_key'] );
+    		unset( $r['name_de'] );
+	    });
+    	return $list;
+    	
+    }
+    
 
 }
