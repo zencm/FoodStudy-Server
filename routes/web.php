@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', 'FoodAppManager@exportForm');
         Route::get('/export', 'FoodAppManager@export');
         Route::get('/studies', 'FoodAdminStudyBreadController@index');
+        Route::get('/qrsignup', 'FoodAdminStudyBreadController@qrsignup')->name('admin.foodapp.qrsignup');
     });
     
     
