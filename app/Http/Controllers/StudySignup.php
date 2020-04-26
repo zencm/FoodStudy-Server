@@ -14,10 +14,11 @@
 			$data = $request->only(['key', 'response']);
 	        if( empty($data) )
 	            throw new Exception('no data',422);
+	        
+	        $signupData = $request->get('signup');
 			
 			
 			$study = FSStudy::where('reg_key', $data['key'])->firstOrFail();
-			
 			
 			
 			
@@ -39,9 +40,16 @@
 
 			
 			
+			// if signup data is not supplied, we only return the study's basic information
+			if( !$signupData ){
+				return ['study'=>[ 'name'=> $study->name ]];
+			}
+			
+			
+			
 			$credentials = $study->createCredentials();
 			
-			return $credentials;
+			return ['credentials'=>['username'=>$credentials['username'], 'password'=>$credentials['password']], 'study'=>['name'=>$study->name]];
 		}
 		
 	}

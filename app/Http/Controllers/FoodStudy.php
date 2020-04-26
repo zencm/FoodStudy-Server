@@ -27,6 +27,7 @@ class FoodStudy extends Controller{
 
         $log = new FSLog();
         $log->user = $user->id;
+        $log->study = $user->fs_study ?: 0;
 
         $log->fill( $data );
 
@@ -47,6 +48,8 @@ class FoodStudy extends Controller{
 
         $log = new FSLogFood();
         $log->user = $user->id;
+        $log->study = $user->fs_study ?: 0;
+        
         $log->fill( $data );
 
 

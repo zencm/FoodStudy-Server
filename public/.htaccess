@@ -3,6 +3,10 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+	<FilesMatch "^apple-app-site-association$">
+		ForceType application/json
+	</FilesMatch>
+
     RewriteEngine On
 
     # Handle Authorization Header

@@ -43,8 +43,9 @@ class FoodAppManager extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
         if( !in_array($type,['log','food']) )
             $type = 'food';
 
-        $datefrom = $request->input('from', date('Y-m-d') );
-        $dateuntil = $request->input('until', date('Y-m-d') );
+        $defaultDate = (new DateTime())->modify('-1 day');
+        $datefrom = $request->input('from', $defaultDate->format('Y-m-d') );
+        $dateuntil = $request->input('until', $defaultDate->format('Y-m-d') );
         $from = Carbon::parse($datefrom)->startOfDay();
         $until = Carbon::parse($dateuntil)->endOfDay();
 
@@ -86,6 +87,12 @@ class FoodAppManager extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
         
         $vars = $this->_getLogs( $request );
 
+        foreach( $vars['logs'] as &$log ){
+            unset( $log['id'] );
+            unset( $log['bls'] );
+            unset( $log['bls_key'] );
+        }
+        
         $logs = $vars['logs'];
 
        
