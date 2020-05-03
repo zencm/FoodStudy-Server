@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/privacy', function () {
+    return view('project.privacy');
+});
+Route::get('/anleitung', function () {
+    return view('project.instructions');
+});
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

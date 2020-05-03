@@ -61,7 +61,6 @@ class CreateFSBaseTables extends Migration
 
             $table->index(['date']);
 
-
         });
 
         Schema::create('fs_log_food', function (Blueprint $table) {

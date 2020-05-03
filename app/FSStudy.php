@@ -62,9 +62,10 @@
 		public $timestamps = false;
 		
 		
-		protected $fillable = [ 'from', 'until', 'name', 'prefix', 'reg_public', 'reg_key', 'reg_pass', 'reg_limit', 'user_count' ];
+		protected $fillable = [ 'from', 'until', 'name', 'prefix', 'reg_public', 'reg_key', 'reg_pass', 'reg_limit', 'user_count', 'question_catalog' ];
 		
 		protected $casts = [
+			'question_catalog' => 'json'
 			// 'sleep' => 'integer',
 			// 'mood' => 'integer',
 			// 'digestion' => 'integer'
@@ -102,22 +103,28 @@
 		}
 		
 		
-		public function createCredentials(){
+		public function createCredentials( $extraData = null ){
 			FSStudy::where('id', $this->id)
-				->increment('user_count');
+			       ->increment('user_count')
+			;
+			
+			$fs_participant = $extraData['fs_participant'] ?: null;
 			
 			
-			$username = $this->prefix .'_'. $this->user_count;
-			$password = random_str(12);
+			$username = $this->prefix . '_' . $this->user_count;
+			$password = random_str(8);
 			
-			$user = User::create([
-				'fs_study' => $this->id,
-	            'name' => $username,
-	            'username' => $username,
-	            'password' => Hash::make($password),
-	        ]);
+			$user = User::create(
+				[
+					'fs_study'      => $this->id,
+					'name'          => $username,
+					'username'      => $username,
+					'password'      => Hash::make($password),
+					'fs_participant' => $fs_participant
+				]
+			);
 			
-			return compact('username', 'password');
+			return compact('username', 'password', 'fs_participant');
 			
 		}
 		

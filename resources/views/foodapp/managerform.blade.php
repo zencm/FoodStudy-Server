@@ -33,7 +33,9 @@
                                     </div>
 
                                     <div class="col-md-4 text-right" >
-                                        <a href="/admin/foodapp/export?type={{$type}}&from={{$datefrom}}&until={{$dateuntil}}" download="FoodApp Export - {{$type}} - {{$datefrom}} - {{$dateuntil}}.csv" class="goexport btn btn-success btn-small"><span class="voyager-download"></span> export</a>
+                                        <a href="/admin/foodapp/export?type={{$type}}&from={{$datefrom}}&until={{$dateuntil}}"
+                                           download="FoodApp Export - {{$type}} - {{$datefrom}} - {{$dateuntil}}.csv"
+                                           class="goexport btn btn-success btn-small"><span class="voyager-download"></span> export</a>
                                     </div>
                                 </div>
                                 
@@ -59,7 +61,9 @@
                                         @foreach ( $logs as $log )
                                             <tr>
                                                 @foreach( $log as $k => $v )
-                                                    <td>{{$v}}</td>
+                                                    <td>
+                                                        <?= gettype($v) === 'array' ? count($v) .' Entries' : htmlspecialchars($v) ?>
+                                                    </td>
                                                 @endforeach
                                             </tr>
                                         @endforeach

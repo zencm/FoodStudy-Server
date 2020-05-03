@@ -10,12 +10,10 @@ class FSLog extends Model{
     public $timestamps = false;
 
 
-    protected $fillable = ['date','sleep','mood','digestion'];
+    protected $fillable = ['date','data'];
 		
     protected $casts = [
-        // 'sleep' => 'integer',
-        // 'mood' => 'integer',
-        // 'digestion' => 'integer'
+    	'data' => 'json'
     ];
 
     protected $dates = [

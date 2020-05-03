@@ -10,9 +10,10 @@ class FSLogFood extends Model{
     public $timestamps = false;
 
 
-    protected $fillable = ['date','bls','bls_key','food','meal_type','people'];
+    protected $fillable = ['date','meal_type','people', 'data'];
 		
     protected $casts = [
+    	'data' => 'json',
         'people' => 'integer'
         // 'sleep' => 'integer',
         // 'mood' => 'integer',

@@ -1,5 +1,6 @@
 {
-    "private": true,
+	"version": "0.0.1",
+	"private": true,
     "author": "Digital Signs GmbH",
     "license": "MIT",
     "scripts": {

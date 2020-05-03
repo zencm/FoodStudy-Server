@@ -63,6 +63,11 @@
                                 <input type="text" class="form-control" id="fs_study" name="fs_study" placeholder="Study ID"
                                        value="{{ old('fs_study', $dataTypeContent->fs_study ?? '') }}">
                             </div>
+                            <div class="form-group">
+                                <label for="name">Participant ID</label>
+                                <input type="text" class="form-control" id="fs_participant" name="fs_participant" placeholder="Participant ID"
+                                       value="{{ old('fs_participant', $dataTypeContent->fs_participant ?? '') }}">
+                            </div>
 
 
                             <div class="form-group">

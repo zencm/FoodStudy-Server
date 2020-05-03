@@ -600,7 +600,7 @@ class FSDataRowsTableSeeder extends Seeder
                 'data_type_id' => 1,
                 'field' => 'user_belongsto_fs_study_relationship',
                 'type' => 'relationship',
-                'display_name' => 'fs_studies',
+                'display_name' => 'Study',
                 'required' => 0,
                 'browse' => 1,
                 'read' => 1,
@@ -626,7 +626,7 @@ class FSDataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 1,
             ),
-            38 => 
+            38 =>
             array (
                 'id' => 41,
                 'data_type_id' => 5,
@@ -642,7 +642,7 @@ class FSDataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 2,
             ),
-            39 => 
+            39 =>
             array (
                 'id' => 42,
                 'data_type_id' => 5,
@@ -673,6 +673,22 @@ class FSDataRowsTableSeeder extends Seeder
                 'delete' => 1,
                 'details' => '{}',
                 'order' => 4,
+            ),
+            41 =>
+            array (
+                'id' => 44,
+                'data_type_id' => 1,
+                'field' => 'fs_participant',
+                'type' => 'text',
+            'display_name' => 'Participant',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 15,
             ),
         ));
         

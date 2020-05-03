@@ -16,6 +16,7 @@
 	            throw new Exception('no data',422);
 	        
 	        $signupData = $request->get('signup');
+	        $participantID = $request->get('participant');
 			
 			
 			$study = FSStudy::where('reg_key', $data['key'])->firstOrFail();
@@ -47,9 +48,9 @@
 			
 			
 			
-			$credentials = $study->createCredentials();
+			$credentials = $study->createCredentials(['fs_participant'=>$participantID]);
 			
-			return ['credentials'=>['username'=>$credentials['username'], 'password'=>$credentials['password']], 'study'=>['name'=>$study->name]];
+			return ['credentials'=>['username'=>$credentials['username'], 'password'=>$credentials['password'], 'participant'=>$credentials['fs_participant']], 'study'=>['name'=>$study->name]];
 		}
 		
 	}

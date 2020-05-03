@@ -18,7 +18,7 @@ class FoodStudy extends Controller{
     public function recordLog( Request $request ){
         $user = Auth::guard()->user();
 
-        $data = $request->only(['date', 'sleep', 'mood', 'digestion']);
+        $data = $request->only(['data','date']);
         if( empty($data) )
             throw new Exception('no data',422);
 
@@ -28,6 +28,7 @@ class FoodStudy extends Controller{
         $log = new FSLog();
         $log->user = $user->id;
         $log->study = $user->fs_study ?: 0;
+        $log->data = $data['data'];
 
         $log->fill( $data );
 
@@ -35,20 +36,29 @@ class FoodStudy extends Controller{
         return \json_encode($saved);
     }
 
+    
     public function recordFood( Request $request ){
         $user = Auth::guard()->user();
 
-        $data = $request->only(['date', 'food', 'meal_type', 'people']);
+        $data = $request->only(['date', 'meal_type', 'people', 'data']);
 
-        if( empty($data) )
+        if( empty($data) || empty($data['data']) )
             throw new Exception('no data',422);
 
         if( !empty($data['date']) )
             $data['date'] = strtotime( $data['date'] );
 
+        
+        $foodData = [];
+        foreach( $data['data'] as $entry ){
+        	array_push($foodData, ['k'=> strip_tags($entry['k']), 'q'=>intval($entry['q'])]);
+        }
+        
+        
         $log = new FSLogFood();
         $log->user = $user->id;
         $log->study = $user->fs_study ?: 0;
+        $log->data = $foodData;
         
         $log->fill( $data );
 
