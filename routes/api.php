@@ -40,6 +40,7 @@ Route::group([
 
     Route::post('log', 'FoodStudy@recordLog');
     Route::post('food', 'FoodStudy@recordFood');
+    Route::get('study', 'FoodStudy@studyData');
     Route::get('bls', 'FoodStudy@bls');
 
 });

@@ -1,0 +1,46 @@
+.fs-question-catalog table input,
+.fs-question-catalog table select,
+.fs-question-catalog table textarea {
+  border: none;
+}
+
+.fs-question-catalog table input.field-config {
+  width: 100%;
+}
+
+.fs-question-catalog table input[type=number] {
+  width: 50px;
+}
+
+.fs-question-catalog td.for-type {
+  opacity: 0.3;
+}
+
+.fs-question-catalog .field-config.slider label {
+  font-size: 10px;
+  font-style: italic;
+  margin-right: 5px;
+}
+
+.fs-question-catalog .field-config.slider .crow {
+  display: flex;
+}
+
+.fs-question-catalog .data-exchange {
+  width: 100%;
+}
+
+.fs-question-catalog .tiny-instructions {
+  font-size: 12px;
+}
+
+.fs-question-catalog .group-config {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fs-question-catalog .group-config > div {
+  padding: 10px;
+  margin-right: 20px;
+}
+

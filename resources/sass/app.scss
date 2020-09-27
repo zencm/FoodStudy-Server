@@ -1,1 +1,51 @@
 //
+.fs-question-catalog{
+	table{
+		input, select, textarea{
+			border: none;
+		}
+		
+		input.field-config{
+			width: 100%;
+		}
+		
+		input[type=number]{
+			width: 50px;
+		}
+	}
+	
+	td.for-type{
+		opacity: .3;
+	}
+	
+	.field-config.slider{
+		label{
+			font-size: 10px;
+			font-style: italic;
+			margin-right: 5px;
+		}
+		
+		.crow{
+			display: flex;
+		}
+	}
+	
+	.data-exchange{
+		width: 100%;
+	}
+	
+	.tiny-instructions{
+		font-size: 12px;
+	}
+	
+	.group-config{
+		display: flex;
+		flex-wrap: wrap;
+		
+		
+		> div {
+			padding: 10px;
+			margin-right: 20px;
+		}
+	}
+}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\FSBLS;
 use App\FSLog;
 use App\FSLogFood;
+use App\FSStudy;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +66,27 @@ class FoodStudy extends Controller{
 
         $saved = $log->save();
         return \json_encode($saved);
+    }
+    
+    public function studyData( Request $request ){
+        $user = Auth::guard()->user();
+
+        $studyID = $request->get('study', $user->fs_study);
+        
+    	$study = FSStudy::findOrFail( $studyID );
+    	
+    	if( !$user->isStudyParticipant( $study->id ) )
+    		throw new Exception('not participating in study',403);
+    	
+
+    	$data = [
+//    		'study'=> ['id'=> $study->id, 'name'=>$study->name],
+    		'study'=> ['name'=>$study->name],
+    		'catalog' => is_string($study->question_catalog) ? json_decode($study->question_catalog,true) : $study->question_catalog
+	    ];
+    	
+    	
+    	return response()->json($data);
     }
 
 

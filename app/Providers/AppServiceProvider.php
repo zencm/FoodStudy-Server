@@ -22,5 +22,6 @@
 		 */
 		public function boot(){
 			Voyager::addAction(\App\Actions\StudyQRSignup::class);
+			Voyager::addAction(\App\Actions\StudyQuestionCatalog::class);
 		}
 	}

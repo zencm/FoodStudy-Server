@@ -11,5 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+	// .js('resources/js/admin.js', 'public/js') // this one is not working that way
+	.copy('node_modules/jquery-serializejson/jquery.serializejson.min.js', 'public/js')
+	.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

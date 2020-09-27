@@ -60,4 +60,11 @@ implements JWTSubject
     public function getJWTCustomClaims()   {
         return [];
     }
+    
+    
+    public function isStudyParticipant( $studyID ){
+    	$studies = is_array($this->fs_study) ? $this->fs_study : [$this->fs_study];
+    	return in_array($studyID, $studies);
+    }
+    
 }
