@@ -8,8 +8,16 @@
   width: 100%;
 }
 
+.fs-question-catalog table input.field-question {
+  width: 100%;
+}
+
 .fs-question-catalog table input[type=number] {
   width: 50px;
+}
+
+.fs-question-catalog td.for-question {
+  width: 450px;
 }
 
 .fs-question-catalog td.for-type {

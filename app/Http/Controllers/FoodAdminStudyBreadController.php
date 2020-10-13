@@ -53,6 +53,26 @@
 				$catalog['format'] = 0;
 				$catalog['version'] = (new \DateTime())->format(\DateTime::ATOM);
 				
+				
+				if( !empty($catalog['groups']) )
+		            foreach( $catalog['groups'] as &$group ){
+		            	$groupQuestions = [];
+		                foreach( $group['questions'] as $question ){
+		                	$question['type'] = strtolower(trim($question['type']?:'slider'));
+		                    if( $question['type'] === 'slider' ){
+		                        if( $question['config'] ){
+		                            if( isset($question['config']['min']))
+		                                $question['config']['min'] = intval($question['config']['min']);
+		                            if( isset($question['config']['max']))
+		                                $question['config']['max'] = intval($question['config']['max']);
+							    }
+						    }
+		                    array_push( $groupQuestions, $question );
+					    }
+					    $group['questions'] = $groupQuestions;
+		                unset( $group );
+				    }
+				
 				$study->question_catalog = json_encode($catalog);
 				$study->save();
 				

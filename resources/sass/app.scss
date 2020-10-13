@@ -9,14 +9,25 @@
 			width: 100%;
 		}
 		
+		input.field-question{
+			width: 100%;
+		}
+		
 		input[type=number]{
 			width: 50px;
 		}
 	}
 	
+	
+	td.for-question{
+		width: 450px;
+	}
+	
+	
 	td.for-type{
 		opacity: .3;
 	}
+	
 	
 	.field-config.slider{
 		label{

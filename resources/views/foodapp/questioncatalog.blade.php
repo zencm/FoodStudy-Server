@@ -42,6 +42,12 @@
 
 							<div class="group-config">
 								<div >
+									<input type="checkbox" class="toggleswitch show-askafter" data-on="only ask after" data-off="always ask"
+										   name="catalog[groups][{{$gnum}}][askafter-enabled]" {{isset($group['askafter-enabled']) ? 'checked' : ''}}
+									/>
+									<input type="time" class="askafter-time" value="{{ isset($group['askafter-time']) ? $group['askafter-time'] : ''}}" name="catalog[groups][{{$gnum}}][askafter-time]" />
+								</div>
+								<div >
 									<input type="checkbox" class="toggleswitch show-reminder" data-on="remind user at" data-off="no reminder"
 										   name="catalog[groups][{{$gnum}}][reminder-enabled]" {{isset($group['reminder-enabled']) ? 'checked' : ''}}
 									/>
@@ -60,6 +66,7 @@
 									<thead>
 										<tr>
 											<th style="width: 1px">Key</th>
+											<th class="for-question">Question</th>
 											<th style="width: 1px" class="for-type">Type</th>
 											<th>Config</th>
 											<th style="width: 1px"></th>
@@ -72,9 +79,12 @@
 												<td>
 													<input type="text" value="{{$question['key']}}" name="catalog[groups][{{$gnum}}][questions][{{$qnum}}][key]" />
 												</td>
+												<td>
+													<input type="text" class="field-question" value="{{$question['question'] ?? ''}}" name="catalog[groups][{{$gnum}}][questions][{{$qnum}}][question]" placeholder="Do you…" />
+												</td>
 												<td class="for-type">
 													<select name="catalog[groups][{{$gnum}}][questions][{{$qnum}}][type]">
-														<option>Slider</option>
+														<option value="slider">Slider</option>
 													</select>
 												</td>
 												<td>
@@ -200,6 +210,7 @@
 					validate();
 				});
 
+				catalogEl.on('change', '.show-askafter',()=>{ refreshControls(); });
 				catalogEl.on('change', '.show-reminder',()=>{ refreshControls(); });
 
 				validate();
@@ -207,6 +218,12 @@
 
 
 				function refreshControls(){
+					catalogEl.find('.show-askafter').each((num, el)=>{
+						const toggle = $(el);
+						toggle .closest('.group-config')
+							.find('.askafter-time')[toggle.prop('checked')?'show':'hide']();
+
+					});
 					catalogEl.find('.show-reminder').each((num, el)=>{
 						const toggle = $(el);
 						toggle .closest('.group-config')
@@ -275,6 +292,12 @@
 					$('<input type="text" />')
 						.attr('name', `catalog[groups][${gnum}][questions][${qnum}][key]`)
 						.attr('value', data.key || '')
+						.appendTo($('<td>').appendTo(tr));
+
+					$('<input type="text" class="field-question" />')
+						.attr('name', `catalog[groups][${gnum}][questions][${qnum}][question]`)
+						.attr('value', data.question || '')
+						.attr('placeholder', 'Do you…')
 						.appendTo($('<td>').appendTo(tr));
 
 					$('<select>')
