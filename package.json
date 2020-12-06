@@ -1,5 +1,5 @@
 {
-    "version": "0.0.2",
+    "version": "0.0.3",
     "private": true,
     "author": "Digital Signs GmbH",
     "license": "MIT",
@@ -15,15 +15,19 @@
     "devDependencies": {
         "axios": "^0.19",
         "cross-env": "^5.1",
+        "foundation-sites": "^6.6.3",
+        "jquery": "^3.5.1",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
+        "motion-ui": "^2.0.3",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
-        "vue-template-compiler": "^2.6.12"
+        "scrollreveal": "^4.0.7",
+        "vue-template-compiler": "^2.6.12",
+        "what-input": "^5.2.10"
     },
     "dependencies": {
-        "jquery": "^3.5.1",
         "jquery-serializejson": "^3.1.0"
     }
 }

@@ -1,0 +1,15 @@
+dl {
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: $global-padding;
+	
+	dt {
+		width: 150px;
+		border-bottom: 1px dotted #eee;
+	}
+	dd {
+		flex-grow: 1;
+		flex-basis: calc(100% - 150px);
+		border-bottom: 1px dotted #eee;
+	}
+}

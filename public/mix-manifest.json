@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/page/css/app.css": "/page/css/app.css",
+    "/page/js/app.js": "/page/js/app.js",
     "/js/jquery.serializejson.min.js": "/js/jquery.serializejson.min.js"
 }
